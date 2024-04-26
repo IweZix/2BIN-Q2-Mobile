@@ -59,13 +59,24 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                     'Unite price: ${widget.dish.price.toStringAsFixed(2)} €',
                     style: const TextStyle(fontSize: 16),
                   ),
-                  Text(
-                    'x${viewModel.getCart()[widget.dish] ?? 0}',
-                    style: const TextStyle(fontSize: 16),
+                  Consumer<DishesViewModel>(
+                    builder: (context, viewModel, child) {
+                      int count = viewModel.getCart()[widget.dish] ?? 0;
+                      return Text(
+                        'x$count',
+                        style: const TextStyle(fontSize: 16),
+                      );
+                    },
                   ),
-                  Text(
-                    totalPrice.toStringAsFixed(2),
-                    style: const TextStyle(fontSize: 16),
+                  Consumer<DishesViewModel>(
+                    builder: (context, viewModel, child) {
+                      int count = viewModel.getCart()[widget.dish] ?? 0;
+                      double totalPrice = count * widget.dish.price;
+                      return Text(
+                        totalPrice.toStringAsFixed(2),
+                        style: const TextStyle(fontSize: 16),
+                      );
+                    },
                   ),
                 ],
               ),

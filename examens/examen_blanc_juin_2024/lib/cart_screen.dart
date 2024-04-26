@@ -54,9 +54,14 @@ class _CartScreenState extends State<CartScreen> {
             ),
           ),
           Center(
-            child: Text(
-              'Total: ${total.toStringAsFixed(2)} €',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            child: Consumer<DishesViewModel>(
+              builder: (context, viewModel, child) {
+                double total = viewModel.getTotal();
+                return Text(
+                  'Total: ${total.toStringAsFixed(2)} €',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                );
+              },
             ),
           ),
         ],
